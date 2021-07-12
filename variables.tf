@@ -50,10 +50,13 @@ variable "mgmt-subnet-2-address-space" {
 
 variable "shared-svcs-snet-address-space" {
   description = "Shared services subnet address space"
-  default = "10.105.0.208/28"
+  default = "10.105.0.224/28"
 }
 
-
+variable "firewall-resource-group" {
+  description = "Firewall resource group"
+  default = "rg-firewall"
+}
 
 
 
