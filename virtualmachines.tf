@@ -39,6 +39,16 @@ resource "azurerm_linux_virtual_machine" "vm-jumpbox-1" {
   }
 }
 
+resource "azurerm_virtual_machine_extension" "da" {
+  name                       = "DAExtension"
+  virtual_machine_id         =  azurerm_linux_virtual_machine.vm-jumpbox-1.id
+  publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
+  type                       = "DependencyAgentLinux"
+  type_handler_version       = "9.5"
+  auto_upgrade_minor_version = true
+
+}
+
 resource "azurerm_network_interface" "nic-winjumpserver1" {
   name                = "nic-winjumpserver1"
   location            = var.hub-location
