@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "hub-vnet-rg" {
-  name     = var.hub-vnet-resource-group
+  name     = var.hub-rg
   location = var.hub-location
 }
 
@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "hub-vnet" {
   address_space       = [var.hub-vnet-address-space]
 
   tags = {
-    environment = "hub-spoke"
+    environment = "Hub"
   }
 }
 
@@ -36,7 +36,7 @@ resource "azurerm_subnet" "hub-firewall-subnet" {
 }
 
 resource "azurerm_subnet" "hub-appgw-subnet" {
-  name                 = "snet-aag-ooredoo-hub-we-001"
+  name                 = "snet-aag-${var.customer-name}-hub-we-001"
   resource_group_name  = azurerm_resource_group.hub-vnet-rg.name
   virtual_network_name = azurerm_virtual_network.hub-vnet.name
   address_prefixes     = [var.appgw-subnet-address-space]
@@ -44,21 +44,21 @@ resource "azurerm_subnet" "hub-appgw-subnet" {
 
 
 resource "azurerm_subnet" "hub-mgmt-subnet-001" {
-  name                 = "snet-mgmt-ooredoo-hub-we-001"
+  name                 = "snet-mgmt-${var.customer-name}-hub-we-001"
   resource_group_name  = azurerm_resource_group.hub-vnet-rg.name
   virtual_network_name = azurerm_virtual_network.hub-vnet.name
   address_prefixes     = [var.mgmt-subnet-1-address-space]
 }
 
 resource "azurerm_subnet" "hub-mgmt-subnet-002" {
-  name                 = "snet-mgmt-ooredoo-hub-we-002"
+  name                 = "snet-mgmt-${var.customer-name}-hub-we-002"
   resource_group_name  = azurerm_resource_group.hub-vnet-rg.name
   virtual_network_name = azurerm_virtual_network.hub-vnet.name
-  address_prefixes       = [var.mgmt-subnet-2-address-space]
+  address_prefixes     = [var.mgmt-subnet-2-address-space]
 }
 
 resource "azurerm_subnet" "hub-sharedsvc-subnet-001" {
-  name                 = "snet-sharedsvc-ooredoo-hub-we-001"
+  name                 = "snet-sharedsvc-${var.customer-name}-hub-we-001"
   resource_group_name  = azurerm_resource_group.hub-vnet-rg.name
   virtual_network_name = azurerm_virtual_network.hub-vnet.name
   address_prefixes       = [var.shared-svcs-snet-address-space]

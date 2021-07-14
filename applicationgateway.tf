@@ -1,6 +1,6 @@
-resource "azurerm_public_ip" "ooredoo-appgw-pip" {
-  name                = "appgw-pip"
-  resource_group_name = var.hub-vnet-resource-group
+resource "azurerm_public_ip" "appgw-pip" {
+  name                = "pip-appgw"
+  resource_group_name = var.hub-rg
   location            = var.hub-location
   allocation_method   = "Dynamic"
 }
@@ -17,8 +17,8 @@ locals {
 }
 
 resource "azurerm_application_gateway" "network" {
-  name                = "ooredoo-appgateway"
-  resource_group_name = var.hub-vnet-resource-group
+  name                = "agw-hub-01"
+  resource_group_name = var.hub-rg
   location            = var.hub-location
 
   sku {
@@ -39,7 +39,7 @@ resource "azurerm_application_gateway" "network" {
 
   frontend_ip_configuration {
     name                 = local.frontend_ip_configuration_name
-    public_ip_address_id = azurerm_public_ip.ooredoo-appgw-pip.id
+    public_ip_address_id = azurerm_public_ip.appgw-pip.id
   }
 
   backend_address_pool {

@@ -1,11 +1,16 @@
+variable "customer-name" {
+  description = "Customer name"
+  default = "changeme"
+}
+
 variable "hub-location" {
   description = "Location of the hub components"
   default     = "westeurope"
 }
 
-variable "hub-vnet-resource-group" {
+variable "hub-rg" {
   description = "Hub Resource Group"
-  default     = "hub-vnet-rg"
+  default     = "rg-hub-01"
 }
 
 variable "hub-prefix" {
@@ -52,12 +57,3 @@ variable "shared-svcs-snet-address-space" {
   description = "Shared services subnet address space"
   default = "10.105.0.224/28"
 }
-
-variable "firewall-resource-group" {
-  description = "Firewall resource group"
-  default = "rg-firewall"
-}
-
-
-
-
