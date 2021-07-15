@@ -29,4 +29,3 @@ output "management-snet-2-id" {
 output "sharedsvc-snet-id" {
   value = azurerm_subnet.hub-sharedsvc-subnet-01.id
 }
-~
