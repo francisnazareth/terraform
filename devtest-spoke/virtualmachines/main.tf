@@ -22,6 +22,10 @@ resource "azurerm_linux_virtual_machine" "vm-linsvr1" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
+
+  tags = {
+    environment = "DevTest"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "fn-nodejs-extn" {
@@ -47,6 +51,6 @@ resource "azurerm_virtual_machine_extension" "fn-nodejs-extn" {
   PROTECTED_SETTINGS
 
   tags = {
-    environment = "Production"
+    environment = "DevTest"
   }
 }

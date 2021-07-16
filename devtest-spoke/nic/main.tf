@@ -7,6 +7,10 @@ resource "azurerm_network_interface" "nic-linsvr1" {
     subnet_id                     = var.app-subnet-id
     private_ip_address_allocation = "Dynamic"
   }
+
+  tags = {
+    environment = "DevTest"
+  }
 }
 
 resource "azurerm_network_interface_security_group_association" "example" {

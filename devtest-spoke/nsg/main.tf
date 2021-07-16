@@ -16,6 +16,6 @@ resource "azurerm_network_security_group" "nsg_devtest_01" {
   }
 
   tags = {
-    environment = "Production"
+    environment = "DevTest"
   }
 }

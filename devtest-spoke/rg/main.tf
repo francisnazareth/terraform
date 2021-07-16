@@ -1,6 +1,10 @@
 resource "azurerm_resource_group" "devtest-rg" {
   name     = var.devtest-rg-name
   location = var.devtest-rg-location
+
+  tags = {
+    environment = "DevTest"
+  }
 }
 
 output "rg-name" {
