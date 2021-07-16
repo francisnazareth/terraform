@@ -1,5 +1,5 @@
 resource "azurerm_virtual_network" "devtest-vnet" {
-  name                = "${var.devtest-prefix}-vnet"
+  name                = "vnet-devtest-${var.rg-location}-01"
   location            = var.rg-location
   resource_group_name = var.rg-name
   address_space       = [var.devtest-vnet-address-space]

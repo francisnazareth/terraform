@@ -9,3 +9,7 @@ variable "rg-name" {
 variable "rg-location" { 
   default = "changeme"
 }
+
+variable "nic-linsvr1-id" { 
+  default = "changeme"
+}

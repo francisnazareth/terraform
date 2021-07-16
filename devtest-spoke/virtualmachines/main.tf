@@ -1,16 +1,3 @@
-resource "azurerm_network_interface" "nic-linsvr1" {
-  name                = "nic-linsvr1"
-  location            = var.rg-location
-  resource_group_name = var.rg-name
-
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = var.app-subnet-id
-    private_ip_address_allocation = "Dynamic"
-  }
-}
-
-
 resource "azurerm_linux_virtual_machine" "vm-linsvr1" {
   name                = "linserver1"
   resource_group_name = var.rg-name
@@ -21,7 +8,7 @@ resource "azurerm_linux_virtual_machine" "vm-linsvr1" {
   disable_password_authentication  = "false"
   provision_vm_agent  = true
   network_interface_ids = [
-    azurerm_network_interface.nic-linsvr1.id,
+    var.nic-linsvr1-id,
   ]
 
   os_disk {
@@ -37,8 +24,8 @@ resource "azurerm_linux_virtual_machine" "vm-linsvr1" {
   }
 }
 
-resource "azurerm_virtual_machine_extension" "example" {
-  name                 = "voting-web-sample"
+resource "azurerm_virtual_machine_extension" "fn-nodejs-extn" {
+  name                 = "nodejs-sample"
   virtual_machine_id   = azurerm_linux_virtual_machine.vm-linsvr1.id
   publisher            = "Microsoft.Azure.Extensions"
   type                 = "CustomScript"
@@ -46,17 +33,15 @@ resource "azurerm_virtual_machine_extension" "example" {
 
   settings= <<SETTINGS
    {
-      "fileUris": ["https://raw.githubusercontent.com/francisnazareth/mslearn-n-tier-architecture/master/Deployment/setup-votingweb.sh",
-                   "https://raw.githubusercontent.com/francisnazareth/mslearn-n-tier-architecture/master/Deployment/votingweb.conf",
-                   "https://raw.githubusercontent.com/francisnazareth/mslearn-n-tier-architecture/master/Deployment/votingweb.service",
-                   "https://raw.githubusercontent.com/francisnazareth/mslearn-n-tier-architecture/master/Deployment/votingweb.zip"
+      "fileUris": ["https://raw.githubusercontent.com/francisnazareth/azure-nodejs/main/setupnodesvr.sh", 
+                   "https://raw.githubusercontent.com/francisnazareth/azure-nodejs/main/app.js"
                   ]
    }
   SETTINGS
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-           "commandToExecute": "sh setup-votingweb.sh"
+           "commandToExecute": "sh setupnodesvr.sh"
     }
 
   PROTECTED_SETTINGS

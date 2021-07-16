@@ -20,8 +20,14 @@ provider "azurerm" {
 
 module "devtest-rg" {
     source               = "./rg"
-    devtest-rg-name      = "rg-hub-01"
+    devtest-rg-name      = "rg-devtest-01"
     devtest-rg-location  = "westeurope"
+}
+
+module "devtest-nsg" {
+    source               = "./nsg"
+    rg-name              = module.devtest-rg.rg-name
+    rg-location          = module.devtest-rg.rg-location
 }
 
 module "devtest-vnet" {
@@ -31,11 +37,19 @@ module "devtest-vnet" {
     customer-name        = var.customer-name
 }
 
+module "nic" {
+    source               = "./nic"
+    rg-name              = module.devtest-rg.rg-name
+    rg-location          = module.devtest-rg.rg-location
+    app-subnet-id        = module.devtest-vnet.app-subnet-id
+    nsg-id               = module.devtest-nsg.nsg-id
+}
+
 module "virtualmachines" {
    source                = "./virtualmachines"
    rg-name               = module.devtest-rg.rg-name
    rg-location           = module.devtest-rg.rg-location
-   app-subnet-id         = module.devtest-vnet.app-subnet-id
+   nic-linsvr1-id        = module.nic.nic-linsvr1-id
    depends_on            = [module.devtest-vnet]
 }
 
