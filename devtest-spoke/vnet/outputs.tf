@@ -3,5 +3,5 @@ output "vnet-name" {
 }
 
 output "app-subnet-id" {
-   value = azurerm_subnet.spoke-app-subnet-001.id
+   value = azurerm_subnet.spoke-app-subnet-01.id
 }

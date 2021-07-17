@@ -15,6 +15,10 @@ variable "customer-name" {
   default = "changeme"
 }
 
+variable "route-table-id" {
+  default = "changeme"
+}
+
 variable "devtest-vnet-address-space" {
   description = "DevTest vnet address Space"
   default = "10.20.0.0/22"

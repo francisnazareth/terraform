@@ -34,7 +34,15 @@ module "devtest-vnet" {
     source               = "./vnet"
     rg-name              = module.devtest-rg.rg-name
     rg-location          = module.devtest-rg.rg-location
+    route-table-id       = module.route-table.route-table-id
     customer-name        = var.customer-name
+}
+
+module "route-table" {
+    source               = "./route-table"
+    rg-name              = module.devtest-rg.rg-name
+    rg-location          = module.devtest-rg.rg-location
+    firewall-private-ip  = "10.105.0.4"
 }
 
 module "nic" {
