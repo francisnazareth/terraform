@@ -7,7 +7,7 @@ resource "azurerm_public_ip" "pip-firewall" {
 }
 
 resource "azurerm_firewall" "azure-ext-fw" {
-  name                = "azure-ext-firewall"
+  name                = "fw-hub-ext"
   location            = var.rg-location
   resource_group_name = var.rg-name
 
