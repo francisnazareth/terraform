@@ -38,7 +38,8 @@ resource "azurerm_virtual_machine_extension" "fn-nodejs-extn" {
   settings= <<SETTINGS
    {
       "fileUris": ["https://raw.githubusercontent.com/francisnazareth/azure-nodejs/main/setupnodesvr.sh", 
-                   "https://raw.githubusercontent.com/francisnazareth/azure-nodejs/main/app.js"
+                   "https://raw.githubusercontent.com/francisnazareth/azure-nodejs/main/app.js",
+                   "https://github.com/francisnazareth/azure-nodejs/raw/main/vote.tar"
                   ]
    }
   SETTINGS
