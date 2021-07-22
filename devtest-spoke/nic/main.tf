@@ -13,7 +13,7 @@ resource "azurerm_network_interface" "nic-linsvr1" {
   }
 }
 
-#resource "azurerm_network_interface_security_group_association" "example" {
-#  network_interface_id      = azurerm_network_interface.nic-linsvr1.id
-#  network_security_group_id = var.nsg-id
-#}
+resource "azurerm_network_interface_security_group_association" "example" {
+  network_interface_id      = azurerm_network_interface.nic-linsvr1.id
+  network_security_group_id = var.nsg-id
+}
