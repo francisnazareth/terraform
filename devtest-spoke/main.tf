@@ -38,6 +38,16 @@ module "devtest-vnet" {
     customer-name        = var.customer-name
 }
 
+#module "devtest-vnet-pering" {
+#    source               = "./vnet-peering"
+#    rg-name              = module.devtest-rg.rg-name
+#    rg-location          = module.devtest-rg.rg-location
+#    devtest-vnet-name    = module.devtest-vnet.vnet-name
+#    devtest-vnet-id      = module.devtest-vnet.vnet-id
+#    hub-vnet-name        = "vnet-hub-${var.devtest-location}-01"
+#    hub-vnet-id          = "/subscriptions/68a21693-1bbf-4db6-9aa3-f332ff4aab20/resourceGroups/rg-hub-01/providers/Microsoft.Network/virtualNetworks/vnet-hub-westeurope-01"
+#}
+
 module "route-table" {
     source               = "./route-table"
     rg-name              = module.devtest-rg.rg-name
