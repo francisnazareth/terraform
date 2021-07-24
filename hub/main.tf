@@ -21,8 +21,8 @@ provider "azurerm" {
 
 module "hub-rg" {
     source         = "./rg"
-    hub-rg         = "rg-hub-01"
-    hub-location   = "westeurope"
+    hub-rg         = var.hub-rg
+    hub-location   = var.hub-location
 }
 
 module "diag-storage" {
@@ -49,7 +49,7 @@ module "keyvault" {
    rg-name         = module.hub-rg.rg-name
    rg-location     = module.hub-rg.rg-location
    customer-name   = var.customer-name
-   soft-delete-retention-days = 7
+   soft-delete-retention-days = var.kv-softdelete-retention-days
 }
 
 module "hub-vnet" {

@@ -18,6 +18,11 @@ variable "hub-prefix" {
   default = "hub"
 }
 
+variable "kv-softdelete-retention-days" {
+  type = number
+  default = 7
+}
+
 variable "hub-vnet-address-space" { 
   description = "Hub vnet address Space"
   default = "10.105.0.0/22"

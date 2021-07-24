@@ -1,7 +1,7 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "hub-keyvault" {
-  name                        = "kv-${var.customer-name}-hub-08"
+  name                        = "kv-${var.customer-name}-hub-01"
   location                    = var.rg-location
   resource_group_name         = var.rg-name
   enabled_for_disk_encryption = true
