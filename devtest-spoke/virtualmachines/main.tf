@@ -45,7 +45,7 @@ resource "azurerm_virtual_machine_extension" "fn-nodejs-extn" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-           "commandToExecute": "sh setupnodesvr.sh ${var.sql-server-name}.database.windows.net ${var.sql-user} ${var.sql-password}"
+           "commandToExecute": "sh setupnodesvr.sh ${var.sql-server-name}.privatelink.database.windows.net ${var.sql-user} ${var.sql-password}"
     }
 
   PROTECTED_SETTINGS

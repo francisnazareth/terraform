@@ -67,6 +67,10 @@ module "sqlserver" {
     source              = "./sqlserver"
     rg-name             = module.devtest-rg.rg-name
     rg-location         = module.devtest-rg.rg-location
+    vnet-id             = module.devtest-vnet.vnet-id
+    db-subnet-id        = module.devtest-vnet.db-subnet-id
+    app-subnet-start-ip = "10.20.0.192"
+    app-subnet-end-ip   = "10.20.0.208"
     sql-server-name     = "ooredoo-sqlserver-3234"
 }
 

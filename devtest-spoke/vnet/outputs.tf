@@ -9,3 +9,7 @@ output "vnet-id" {
 output "app-subnet-id" {
    value = azurerm_subnet.spoke-app-subnet-01.id
 }
+
+output "db-subnet-id" {
+   value = azurerm_subnet.spoke-db-subnet-01.id
+}

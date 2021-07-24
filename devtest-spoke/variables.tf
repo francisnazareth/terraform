@@ -32,3 +32,7 @@ variable "db-subnet-address-space" {
   description = "DB subnet address space"
   default = "10.20.0.208/28"
 }
+
+variable "firewall-ip"  {
+  default= "changeme "
+}

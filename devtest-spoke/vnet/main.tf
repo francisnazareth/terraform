@@ -21,9 +21,12 @@ resource "azurerm_subnet" "spoke-app-subnet-01" {
 #  route_table_id = var.route-table-id
 #}
 
-resource "azurerm_subnet" "spoke-db-subnet-001" {
-  name                 = "snet-db-001"
+resource "azurerm_subnet" "spoke-db-subnet-01" {
+  name                 = "snet-db-01"
   resource_group_name  = var.rg-name
   virtual_network_name = azurerm_virtual_network.devtest-vnet.name
   address_prefixes     = [var.db-subnet-address-space]
+
+  enforce_private_link_endpoint_network_policies = true
+  enforce_private_link_service_network_policies  = true
 }
