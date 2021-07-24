@@ -38,7 +38,6 @@ resource "azurerm_virtual_machine_extension" "fn-nodejs-extn" {
   settings= <<SETTINGS
    {
       "fileUris": ["https://raw.githubusercontent.com/francisnazareth/azure-nodejs/main/setupnodesvr.sh", 
-                   "https://raw.githubusercontent.com/francisnazareth/azure-nodejs/main/app.js",
                    "https://github.com/francisnazareth/azure-nodejs/raw/main/vote.tar"
                   ]
    }
@@ -46,7 +45,7 @@ resource "azurerm_virtual_machine_extension" "fn-nodejs-extn" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-           "commandToExecute": "sh setupnodesvr.sh"
+           "commandToExecute": "sh setupnodesvr.sh ${var.sql-server-name}.database.windows.net ${var.sql-user} ${var.sql-password}"
     }
 
   PROTECTED_SETTINGS

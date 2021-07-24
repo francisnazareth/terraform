@@ -13,3 +13,16 @@ variable "rg-location" {
 variable "nic-linsvr1-id" { 
   default = "changeme"
 }
+
+variable "sql-server-name" {
+  default = "changeme"
+}
+
+variable "sql-user" {
+  default = "changeme"
+}
+
+variable "sql-password" { 
+  default = "changeme"
+}
+

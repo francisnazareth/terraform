@@ -1,10 +1,19 @@
 resource "azurerm_mssql_server" "sql-server" {
-  name                         = "qr-sqlserver-3234"
+  name                         = var.sql-server-name
   resource_group_name          = var.rg-name
   location                     = var.rg-location
   version                      = "12.0"
   administrator_login          = "sqladmin"
-  administrator_login_password = "Passw0rd!123"
+  administrator_login_password = "Passw0rd123"
+}
+
+
+resource "azurerm_sql_firewall_rule" "example" {
+  name                = "fw-allow-app-subnet"
+  resource_group_name = var.rg-name
+  server_name         = azurerm_mssql_server.sql-server.name
+  start_ip_address    = "10.20.0.192"
+  end_ip_address      = "10.20.0.208"
 }
 
 resource "azurerm_mssql_database" "sample" {

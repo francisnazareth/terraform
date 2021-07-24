@@ -63,11 +63,21 @@ module "nic" {
     nsg-id               = module.devtest-nsg.nsg-id
 }
 
+module "sqlserver" {
+    source              = "./sqlserver"
+    rg-name             = module.devtest-rg.rg-name
+    rg-location         = module.devtest-rg.rg-location
+    sql-server-name     = "ooredoo-sqlserver-3234"
+}
+
 module "virtualmachines" {
    source                = "./virtualmachines"
    rg-name               = module.devtest-rg.rg-name
    rg-location           = module.devtest-rg.rg-location
    nic-linsvr1-id        = module.nic.nic-linsvr1-id
-   depends_on            = [module.devtest-vnet]
+   sql-server-name       = module.sqlserver.sql-server-name
+   sql-user              = module.sqlserver.sql-user
+   sql-password          = module.sqlserver.sql-password
+   depends_on            = [module.devtest-vnet, module.sqlserver]
 }
 
