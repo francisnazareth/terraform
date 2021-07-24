@@ -36,6 +36,7 @@ module "laworkspace" {
     source         = "./laworkspace"
     rg-name        = module.hub-rg.rg-name
     rg-location    = module.hub-rg.rg-location
+    la-log-retention-in-days = var.la-log-retention-in-days
 }
 
 module "recovery-service-vault" {

@@ -82,14 +82,10 @@ variable "linux-admin-password" {
   default = "P@$$w0rd1234!"
 }
 
+################ LOG ANALYTICS WORKSPACE ##################
 
-
-
-
-
-
-
-
-
-
+variable "la-log-retention-in-days" {
+  type: number
+  default: 30
+}
 
