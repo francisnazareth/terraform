@@ -99,5 +99,9 @@ module "virtualmachines" {
    rg-location           = module.hub-rg.rg-location
    mgmt-snet-1-id        = module.hub-vnet.management-snet-1-id
    mgmt-snet-2-id        = module.hub-vnet.management-snet-2-id
+   windows-admin-userid  = var.windows-admin-userid
+   windows-admin-password  = var.windows-admin-password
+   linux-admin-userid    = var.linux-admin-userid
+   linux-admin-password  = var.linux-admin-password
    depends_on            = [module.hub-vnet]
 }

@@ -13,3 +13,19 @@ variable "mgmt-snet-1-id" {
 variable "mgmt-snet-2-id" {
    default = "changeme"
 }
+
+variable "windows-admin-userid" {
+   default = "changeme"
+}
+
+variable "windows-admin-password" {
+   default = "changeme"
+}
+
+variable "linux-admin-userid" {
+   default = "changeme"
+}
+
+variable "linux-admin-password" {
+   default = "changeme"
+}

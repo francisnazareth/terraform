@@ -15,15 +15,13 @@ resource "azurerm_linux_virtual_machine" "vm-jumpbox-1" {
   resource_group_name = var.rg-name
   location            = var.rg-location
   size                = "Standard_D2a_v4"
-  admin_username      = "adminuser"
+  admin_username      = var.linux-admin-userid
+  admin_password      = var.linux-admin-password
+  disable_password_authentication  = "false"
+
   network_interface_ids = [
     azurerm_network_interface.nic-linjumpserver1.id,
   ]
-
-  admin_ssh_key {
-    username   = "adminuser"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
 
   os_disk {
     caching              = "ReadWrite"
@@ -65,8 +63,8 @@ resource "azurerm_windows_virtual_machine" "vm-jumpbox-2" {
   resource_group_name = var.rg-name
   location            = var.rg-location
   size                = "Standard_D2a_v4"
-  admin_username      = "adminuser"
-  admin_password      = "P@$$w0rd1234!"
+  admin_username      = var.windows-admin-userid
+  admin_password      = var.windows-admin-password
   network_interface_ids = [
     azurerm_network_interface.nic-winjumpserver1.id,
   ]
