@@ -25,6 +25,12 @@ module "hub-rg" {
     hub-location   = var.hub-location
 }
 
+module "nsg"  {
+    source         = "./nsg"
+    rg-name         = var.hub-rg
+    rg-location   = var.hub-location
+}
+
 module "diag-storage" {
     source         = "./storage"
     rg-name        = module.hub-rg.rg-name

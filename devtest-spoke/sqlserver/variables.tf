@@ -1,14 +1,13 @@
 variable "rg-location" {
-  default     = "westeurope"
+  default     = "changeme"
 }
 
 variable "rg-name" {
-  description = "DevTest Resource Group"
-  default     = "rg-devtest-01"
+  default     = "changeme"
 }
 
 variable "sql-server-name" {
-  default     = "changeme"
+  default     = "changeme-sqlserver-3234"
 }
 
 variable "app-subnet-start-ip"{

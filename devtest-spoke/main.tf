@@ -20,8 +20,8 @@ provider "azurerm" {
 
 module "devtest-rg" {
     source               = "./rg"
-    devtest-rg-name      = "rg-devtest-01"
-    devtest-rg-location  = "westeurope"
+    devtest-rg-name      = var.devtest-rg
+    devtest-rg-location  = var.devtest-location
 }
 
 module "devtest-nsg" {
@@ -35,6 +35,9 @@ module "devtest-vnet" {
     rg-name              = module.devtest-rg.rg-name
     rg-location          = module.devtest-rg.rg-location
     route-table-id       = module.route-table.route-table-id
+    devtest-vnet-address-space    = var.devtest-vnet-address-space
+    app-subnet-address-space      = var.app-subnet-address-space
+    db-subnet-address-space       = var.db-subnet-address-space
     customer-name        = var.customer-name
 }
 
@@ -71,7 +74,6 @@ module "sqlserver" {
     db-subnet-id        = module.devtest-vnet.db-subnet-id
     app-subnet-start-ip = "10.20.0.192"
     app-subnet-end-ip   = "10.20.0.208"
-    sql-server-name     = "ooredoo-sqlserver-3234"
 }
 
 module "virtualmachines" {
