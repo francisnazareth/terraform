@@ -13,13 +13,13 @@ Terraform scripts to create Azure Qatar Landing Zone
 ### Provision Hub 
 * Go to the folder terraform/hub
 * Edit the file main.tf 
-* In the block : provider "azurerm" {, change the values of following:
+* In the block : provider "azurerm" change the values of following, and save the file. 
 *  subscription_id => Azure subscription ID (from az list command)
-*  client_id => appId value from az ad sp create-for-rbac command)
-*  tenand_id => tenant value from az ad sp create-for-rbac command)
+*  -> client_id => appId value from az ad sp create-for-rbac command)
+*  -> tenand_id => tenant value from az ad sp create-for-rbac command)
 * Change the values in variables.tf
-** Change the value of customer-name variable to a short customer identifier value (default = "changeme" to default = "xyz")
-** Change the other values for variables as necessary. Save the file. 
+* Change the value of customer-name variable to a short customer identifier value (default = "changeme" to default = "xyz")
+* Change the other values for variables as necessary. Save the file. 
 From the hub folder, issue the following commands: 
 * -> terraform init
 * -> terraform apply -var="client_secret=spac_client_secret"  (instead of spac_client_secret, use the password value from az ad sp create-for-rbac command). 
