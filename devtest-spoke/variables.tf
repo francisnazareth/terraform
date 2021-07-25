@@ -33,6 +33,14 @@ variable "db-subnet-address-space" {
   default = "10.20.0.208/28"
 }
 
+variable "app-subnet-start-ip" { 
+  default = "10.20.0.192"
+}
+
+variable "app-subnet-end-ip" { 
+  default = "10.20.0.208"
+}
+
 variable "firewall-ip"  {
-  default= "changeme "
+  default= "10.105.0.4"
 }

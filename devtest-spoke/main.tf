@@ -16,6 +16,11 @@ provider "azurerm" {
       purge_soft_delete_on_destroy = true
     }
    }
+
+  subscription_id = "00000000-0000-0000-0000-000000000000"
+  client_id       = "00000000-0000-0000-0000-000000000000"
+  client_secret   = var.client_secret
+  tenant_id       = "00000000-0000-0000-0000-000000000000"
 }
 
 module "devtest-rg" {
@@ -55,7 +60,7 @@ module "route-table" {
     source               = "./route-table"
     rg-name              = module.devtest-rg.rg-name
     rg-location          = module.devtest-rg.rg-location
-    firewall-private-ip  = "10.105.0.4"
+    firewall-private-ip  = var.firewall-ip
 }
 
 module "nic" {
@@ -72,8 +77,8 @@ module "sqlserver" {
     rg-location         = module.devtest-rg.rg-location
     vnet-id             = module.devtest-vnet.vnet-id
     db-subnet-id        = module.devtest-vnet.db-subnet-id
-    app-subnet-start-ip = "10.20.0.192"
-    app-subnet-end-ip   = "10.20.0.208"
+    app-subnet-start-ip = var.app-subnet-start-ip
+    app-subnet-end-ip   = var.app-subnet-end-ip
 }
 
 module "virtualmachines" {
@@ -86,4 +91,3 @@ module "virtualmachines" {
    sql-password          = module.sqlserver.sql-password
    depends_on            = [module.devtest-vnet, module.sqlserver]
 }
-
