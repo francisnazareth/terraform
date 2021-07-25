@@ -8,5 +8,5 @@ Terraform scripts to create Azure Qatar Landing Zone
 * Login to azure from the linux machine CLI (az login)
 * Go to the folder terraform/hub
 * Change the values in variables.tf
-** terraform init
-** terraform apply
+* -> terraform init
+* -> terraform apply
