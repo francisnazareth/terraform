@@ -1,15 +1,3 @@
-resource "azurerm_network_interface" "nic-linjumpserver1" {
-  name                = "nic-linjumpserver1"
-  location            = var.rg-location
-  resource_group_name = var.rg-name
-
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = var.mgmt-snet-1-id
-    private_ip_address_allocation = "Dynamic"
-  }
-}
-
 resource "azurerm_linux_virtual_machine" "vm-jumpbox-1" {
   name                = "linjumpserver1"
   resource_group_name = var.rg-name
@@ -20,7 +8,7 @@ resource "azurerm_linux_virtual_machine" "vm-jumpbox-1" {
   disable_password_authentication  = "false"
 
   network_interface_ids = [
-    azurerm_network_interface.nic-linjumpserver1.id,
+    var.nic-linjumpserver1-id,
   ]
 
   os_disk {
@@ -46,18 +34,6 @@ resource "azurerm_virtual_machine_extension" "da" {
 
 }
 
-resource "azurerm_network_interface" "nic-winjumpserver1" {
-  name                = "nic-winjumpserver1"
-  location            = var.rg-location
-  resource_group_name = var.rg-name
-
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = var.mgmt-snet-2-id
-    private_ip_address_allocation = "Dynamic"
-  }
-}
-
 resource "azurerm_windows_virtual_machine" "vm-jumpbox-2" {
   name                = "winjumpserver1"
   resource_group_name = var.rg-name
@@ -66,7 +42,7 @@ resource "azurerm_windows_virtual_machine" "vm-jumpbox-2" {
   admin_username      = var.windows-admin-userid
   admin_password      = var.windows-admin-password
   network_interface_ids = [
-    azurerm_network_interface.nic-winjumpserver1.id,
+    var.nic-winjumpserver1-id,
   ]
 
   os_disk {

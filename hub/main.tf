@@ -25,12 +25,6 @@ module "hub-rg" {
     hub-location   = var.hub-location
 }
 
-module "nsg"  {
-    source         = "./nsg"
-    rg-name         = var.hub-rg
-    rg-location   = var.hub-location
-}
-
 module "diag-storage" {
     source         = "./storage"
     rg-name        = module.hub-rg.rg-name
@@ -63,8 +57,32 @@ module "hub-vnet" {
     source               = "./vnet"
     rg-name              = module.hub-rg.rg-name
     rg-location          = module.hub-rg.rg-location
+    hub-vnet-address-space           = var.hub-vnet-address-space
+    firewall-subnet-address-space    = var.firewall-subnet-address-space
+    appgw-subnet-address-space       = var.appgw-subnet-address-space
+    gateway-subnet-address-space     = var.gateway-subnet-address-space
+    bastion-subnet-address-space     = var.bastion-subnet-address-space
+    mgmt-subnet-1-address-space      = var.mgmt-subnet-1-address-space
+    mgmt-subnet-2-address-space      = var.mgmt-subnet-2-address-space
+    shared-svcs-snet-address-space   = var.shared-svcs-snet-address-space
     hub-prefix           = var.hub-prefix
     customer-name        = var.customer-name
+}
+
+
+module "nsg"  {
+    source         = "./nsg"
+    rg-name        = module.hub-rg.rg-name
+    rg-location    = module.hub-rg.rg-location
+}
+
+module "nic" {
+    source               = "./nic"
+    rg-name              = module.hub-rg.rg-name
+    rg-location          = module.hub-rg.rg-location
+    mgmt-snet-1-id = module.hub-vnet.management-snet-1-id
+    mgmt-snet-2-id = module.hub-vnet.management-snet-2-id
+    nsg-id               = module.nsg.nsg-id
 }
 
 module "bastion" {
@@ -104,11 +122,11 @@ module "virtualmachines" {
    source                = "./virtualmachines"
    rg-name               = module.hub-rg.rg-name
    rg-location           = module.hub-rg.rg-location
-   mgmt-snet-1-id        = module.hub-vnet.management-snet-1-id
-   mgmt-snet-2-id        = module.hub-vnet.management-snet-2-id
    windows-admin-userid  = var.windows-admin-userid
    windows-admin-password  = var.windows-admin-password
    linux-admin-userid    = var.linux-admin-userid
    linux-admin-password  = var.linux-admin-password
+   nic-linjumpserver1-id = module.nic.nic-linjumpserver1-id
+   nic-winjumpserver1-id = module.nic.nic-winjumpserver1-id
    depends_on            = [module.hub-vnet]
 }

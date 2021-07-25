@@ -7,6 +7,6 @@ variable "rg-name" {
 }
 
 variable "la-log-retention-in-days" {
-  type: number
-  default: 30
+  type =  number
+  default =  30
 }

@@ -29,3 +29,11 @@ variable "linux-admin-userid" {
 variable "linux-admin-password" {
    default = "changeme"
 }
+
+variable "nic-linjumpserver1-id" { 
+   default = "changeme"
+}
+
+variable "nic-winjumpserver1-id" { 
+   default = "changeme"
+}
