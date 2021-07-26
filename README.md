@@ -41,4 +41,16 @@ From the hub folder, issue the following commands:
 * -> terraform init
 * -> terraform apply -var="client_secret=spac_client_secret"  (instead of spac_client_secret, use the password value from az ad sp create-for-rbac command). 
 
-Establish VNET peering between both the VNETs
+### Establish VNET peering between both the VNETs
+* Either from the Hub VNET or from the DevTest VNET, go to peerings -> create peering. 
+* Ensure that the peering is in connected state. 
+
+### Access the nodejs service from Windows Jump server.
+* Find out private IP of the linux machine in DevTest subscription
+* Access this IP through a browser on port 8080, in the windows jump server. For example, http://10.20.0.0:8080. This should get you a welcome to express page. 
+* Access the following URL: http://10.20.0.0:8080/votes/create  (to create tables in SQL server and populate initial data)
+* Access the vote application using the URL http://10.20.0.0:8080
+
+### Expose the URL to outside using Azure Application Gateway
+
+
