@@ -47,10 +47,11 @@ From the hub folder, issue the following commands:
 
 ### Access the nodejs service from Windows Jump server.
 * Find out private IP of the linux machine in DevTest subscription
-* Access this IP through a browser on port 8080, in the windows jump server. For example, http://10.20.0.0:8080. This should get you a welcome to express page. 
-* Access the following URL: http://10.20.0.0:8080/votes/create  (to create tables in SQL server and populate initial data)
-* Access the vote application using the URL http://10.20.0.0:8080
+* Access this IP through a browser on port 8080, in the windows jump server. For example, http://10.20.0.196:8080. This should get you a welcome to express page. 
+* Access the following URL: http://10.20.0.196:8080/votes/create  (to create tables in SQL server and populate initial data)
+* Access the vote application using the URL http://10.20.0.196:8080
 
 ### Expose the URL to outside using Azure Application Gateway
-
+* In the hub resource group, access the application gateway. Go to backend pools. Edit the backend pool and provide the IP address of linux machine in devtest subscription (for example, 10.20.0.196
+* 
 
