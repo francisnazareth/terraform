@@ -18,6 +18,10 @@ variable "devtest-prefix" {
   default = "devtest"
 }
 
+variable "client_secret" {
+  default = "changeme"
+}
+
 variable "devtest-vnet-address-space" {
   description = "DevTest vnet address Space"
   default = "10.20.0.0/22"

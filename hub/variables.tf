@@ -18,6 +18,10 @@ variable "hub-prefix" {
   default = "hub"
 }
 
+variable "client_secret" {
+  default = "changeme"
+}
+
 ############################ KEY VAULT ########################
 variable "kv-softdelete-retention-days" {
   type = number
