@@ -101,6 +101,7 @@ module "virtualmachines" {
 }
 
 module "route-table-association" { 
+   source               = "./route-table-association"
    app-subnet-id        = module.devtest-vnet.app-subnet-id
    route-table-id       = module.route-table.route-table-id
    depends_on           = [module.virtualmachines]
