@@ -16,10 +16,10 @@ resource "azurerm_subnet" "spoke-app-subnet-01" {
   address_prefixes     = [var.app-subnet-address-space]
 }
 
-#resource "azurerm_subnet_route_table_association" "app-subnet-to-route-table" {
-#  subnet_id      = azurerm_subnet.spoke-app-subnet-01.id
-#  route_table_id = var.route-table-id
-#}
+resource "azurerm_subnet_route_table_association" "app-subnet-to-route-table" {
+  subnet_id      = azurerm_subnet.spoke-app-subnet-01.id
+  route_table_id = var.route-table-id
+}
 
 resource "azurerm_subnet" "spoke-db-subnet-01" {
   name                 = "snet-db-01"

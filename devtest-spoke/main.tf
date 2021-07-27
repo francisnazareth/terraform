@@ -17,10 +17,13 @@ provider "azurerm" {
     }
    }
 
-  subscription_id = "00000000-0000-0000-0000-000000000000"
-  client_id       = "00000000-0000-0000-0000-000000000000"
+#  subscription_id = "00000000-0000-0000-0000-000000000000"
+  subscription_id = "68a21693-1bbf-4db6-9aa3-f332ff4aab20"
+#  client_id       = "00000000-0000-0000-0000-000000000000"
+  client_id       = "dece5349-a0d7-4d0c-842f-95833da15929"
   client_secret   = var.client_secret
-  tenant_id       = "00000000-0000-0000-0000-000000000000"
+#  tenant_id       = "00000000-0000-0000-0000-000000000000"
+  tenant_id       = "72f988bf-86f1-41af-91ab-2d7cd011db47"
 }
 
 module "devtest-rg" {
@@ -60,6 +63,7 @@ module "route-table" {
     source               = "./route-table"
     rg-name              = module.devtest-rg.rg-name
     rg-location          = module.devtest-rg.rg-location
+    devtest-vnet-address-space = var.devtest-vnet-address-space
     firewall-private-ip  = var.firewall-ip
 }
 
