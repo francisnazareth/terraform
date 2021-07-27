@@ -26,3 +26,10 @@ variable "sql-password" {
   default = "changeme"
 }
 
+variable "linux-vm-admin-user" { 
+  default = "changeme"
+}
+
+variable "linux-vm-admin-password" { 
+  default = "changeme"
+}

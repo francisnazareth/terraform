@@ -3,8 +3,8 @@ resource "azurerm_mssql_server" "sql-server" {
   resource_group_name          = var.rg-name
   location                     = var.rg-location
   version                      = "12.0"
-  administrator_login          = "sqladmin"
-  administrator_login_password = "Passw0rd123"
+  administrator_login          = var.sql-server-admin-user
+  administrator_login_password = var.sql-server-admin-password
 }
 
 resource "azurerm_sql_firewall_rule" "rule-allow-app-subnet" {

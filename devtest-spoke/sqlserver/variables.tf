@@ -7,7 +7,15 @@ variable "rg-name" {
 }
 
 variable "sql-server-name" {
-  default     = "changeme-sqlserver-3234"
+  default     = "changeme"
+}
+
+variable "sql-server-admin-user" { 
+  default = "changeme"
+}
+
+variable "sql-server-admin-password" { 
+  default = "changeme"
 }
 
 variable "app-subnet-start-ip"{

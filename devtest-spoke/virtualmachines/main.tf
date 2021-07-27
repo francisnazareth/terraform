@@ -3,8 +3,8 @@ resource "azurerm_linux_virtual_machine" "vm-linsvr1" {
   resource_group_name = var.rg-name
   location            = var.rg-location
   size                = "Standard_D2a_v4"
-  admin_username      = "linadmin"
-  admin_password      = "Passw0rd123!"
+  admin_username      = var.linux-vm-admin-user
+  admin_password      = var.linux-vm-admin-password
   disable_password_authentication  = "false"
   provision_vm_agent  = true
   network_interface_ids = [

@@ -44,3 +44,24 @@ variable "app-subnet-end-ip" {
 variable "firewall-ip"  {
   default= "10.105.0.4"
 }
+
+variable "sql-server-name" {
+  default="changme-sqlserver5465"
+}
+
+variable "sql-server-admin-user" {
+  default = "sqladmin" 
+}
+
+variable "sql-server-admin-password" { 
+  default = "Passw0rd123"
+}
+
+variable "linux-vm-admin-user" {
+  default = "linadmin"
+}
+
+variable "linux-vm-admin-password" {
+  default = "Passw0rd123!"
+}
+

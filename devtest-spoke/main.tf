@@ -53,7 +53,7 @@ module "devtest-vnet" {
 #    devtest-vnet-name    = module.devtest-vnet.vnet-name
 #    devtest-vnet-id      = module.devtest-vnet.vnet-id
 #    hub-vnet-name        = "vnet-hub-${var.devtest-location}-01"
-#    hub-vnet-id          = "/subscriptions/68a21693-1bbf-4db6-9aa3-f332ff4aab20/resourceGroups/rg-hub-01/providers/Microsoft.Network/virtualNetworks/vnet-hub-westeurope-01"
+#    hub-vnet-id          = ""
 #}
 
 module "route-table" {
@@ -75,6 +75,9 @@ module "sqlserver" {
     source              = "./sqlserver"
     rg-name             = module.devtest-rg.rg-name
     rg-location         = module.devtest-rg.rg-location
+    sql-server-name      = var.sql-server-name
+    sql-server-admin-user = var.sql-server-admin-user
+    sql-server-admin-password = var.sql-server-admin-password
     vnet-id             = module.devtest-vnet.vnet-id
     db-subnet-id        = module.devtest-vnet.db-subnet-id
     app-subnet-start-ip = var.app-subnet-start-ip
@@ -85,6 +88,8 @@ module "virtualmachines" {
    source                = "./virtualmachines"
    rg-name               = module.devtest-rg.rg-name
    rg-location           = module.devtest-rg.rg-location
+   linux-vm-admin-user   = var.linux-vm-admin-user
+   linux-vm-admin-password = var.linux-vm-admin-password
    nic-linsvr1-id        = module.nic.nic-linsvr1-id
    sql-server-name       = module.sqlserver.sql-server-name
    sql-user              = module.sqlserver.sql-user
