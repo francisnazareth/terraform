@@ -32,7 +32,43 @@ resource "azurerm_virtual_machine_extension" "da" {
   type_handler_version       = "9.5"
   auto_upgrade_minor_version = true
 
+  settings = <<SETTINGS
+    {
+      "workspaceId" : var.la-workspace-id
+    }
+  SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "workspaceKey" : var.la-workspace-key
+    }
+  PROTECTED_SETTINGS
 }
+
+#===================================================================
+# Set Monitoring and Log Analytics Workspace
+#===================================================================
+resource "azurerm_virtual_machine_extension" "oms_mma02" {
+  name                       = "test-OMSExtension"
+ virtual_machine_id         =  azurerm_linux_virtual_machine.vm-jumpbox-1.id
+  publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
+  type                       = "OmsAgentForLinux"
+  type_handler_version       = "1.12"
+  auto_upgrade_minor_version = true
+
+  settings = <<SETTINGS
+    {
+      "workspaceId" : var.la-workspace-id
+    }
+  SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "workspaceKey" : var.la-workspace-key
+    }
+  PROTECTED_SETTINGS
+}
+
 
 resource "azurerm_windows_virtual_machine" "vm-jumpbox-2" {
   name                = "winjumpserver1"
@@ -56,4 +92,27 @@ resource "azurerm_windows_virtual_machine" "vm-jumpbox-2" {
     sku       = "2016-Datacenter"
     version   = "latest"
   }
+}
+
+resource "azurerm_virtual_machine_extension" "monitor-DependencyAgent-agent" {
+  name                  = "DAExtensionWindows"
+  location              = var.rg-location
+  resource_group_name   = var.rg-name
+  virtual_machine_id    =  azurerm_windows_virtual_machine.vm-jumpbox-2.id
+  publisher             = "Microsoft.Azure.Monitoring.DependencyAgent"
+  type                  = "DependencyAgentWindows"
+  type_handler_version  = "9.5"
+  auto_upgrade_minor_version = true
+
+  settings = <<SETTINGS
+        {
+          "workspaceId": var.la-workspace-id
+        }
+  SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+        {
+          "workspaceKey": var.la-workspace-key
+        }
+  PROTECTED_SETTINGS
 }

@@ -85,8 +85,8 @@ module "nic" {
     source               = "./nic"
     rg-name              = module.hub-rg.rg-name
     rg-location          = module.hub-rg.rg-location
-    mgmt-snet-1-id = module.hub-vnet.management-snet-1-id
-    mgmt-snet-2-id = module.hub-vnet.management-snet-2-id
+    mgmt-snet-1-id       = module.hub-vnet.management-snet-1-id
+    mgmt-snet-2-id       = module.hub-vnet.management-snet-2-id
     nsg-id               = module.nsg.nsg-id
 }
 
@@ -127,6 +127,8 @@ module "virtualmachines" {
    source                = "./virtualmachines"
    rg-name               = module.hub-rg.rg-name
    rg-location           = module.hub-rg.rg-location
+   la-workspace-id       = module.la-workspace.la-workspace-id
+   la-workspace-key      = module.la-workspace.la-workspace-key
    windows-admin-userid  = var.windows-admin-userid
    windows-admin-password  = var.windows-admin-password
    linux-admin-userid    = var.linux-admin-userid

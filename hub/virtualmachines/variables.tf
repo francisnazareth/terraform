@@ -6,6 +6,14 @@ variable "rg-name" {
    default = "changeme"
 }
 
+variable "la-workspace-id" { 
+  default= "changeme"
+}
+
+variable "la-workspace-key" { 
+  default= "changeme"
+}
+
 variable "mgmt-snet-1-id" {
    default = "changeme"
 }
