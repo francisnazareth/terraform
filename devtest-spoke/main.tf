@@ -42,7 +42,6 @@ module "devtest-vnet" {
     source               = "./vnet"
     rg-name              = module.devtest-rg.rg-name
     rg-location          = module.devtest-rg.rg-location
-    route-table-id       = module.route-table.route-table-id
     devtest-vnet-address-space    = var.devtest-vnet-address-space
     app-subnet-address-space      = var.app-subnet-address-space
     db-subnet-address-space       = var.db-subnet-address-space
@@ -100,3 +99,10 @@ module "virtualmachines" {
    sql-password          = module.sqlserver.sql-password
    depends_on            = [module.devtest-vnet, module.sqlserver]
 }
+
+module "route-table-association" { 
+   app-subnet-id        = module.devtest-vnet.app-subnet-id
+   route-table-id       = module.route-table.route-table-id
+   depends_on           = [module.virtualmachines]
+}
+
