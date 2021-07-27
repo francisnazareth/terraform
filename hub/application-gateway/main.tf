@@ -5,7 +5,7 @@ resource "azurerm_public_ip" "appgw-pip" {
   allocation_method   = "Dynamic"
 }
 
-#&nbsp;since these variables are re-used - a locals block makes this more maintainable
+#since these variables are re-used - a locals block makes this more maintainable
 locals {
   backend_address_pool_name      = "${var.vnet-name}-beap"
   frontend_port_name             = "${var.vnet-name}-feport"
@@ -22,9 +22,15 @@ resource "azurerm_application_gateway" "network" {
   location            = var.rg-location
 
   sku {
-    name     = "Standard_Small"
-    tier     = "Standard"
+    name     = "WAF"
+    tier     = "WAF_v2"
     capacity = 2
+  }
+
+  waf_configuration {
+    enabled    = true
+    firewall_mode = "Prevention"
+    max_request_body_size_kb = 16
   }
 
   gateway_ip_configuration {
