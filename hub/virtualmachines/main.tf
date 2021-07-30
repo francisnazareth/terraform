@@ -94,6 +94,31 @@ resource "azurerm_windows_virtual_machine" "vm-jumpbox-2" {
   }
 }
 
+#--------------------------------------------------------------
+# Azure Log Analytics Workspace Agent Installation for windows
+#--------------------------------------------------------------
+resource "azurerm_virtual_machine_extension" "omsagentwin" {
+  name                       = "OMS_Extension_Windows"
+  virtual_machine_id         = azurerm_windows_virtual_machine.vm-jumpbox-2.id 
+  publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
+  type                       = "MicrosoftMonitoringAgent"
+  type_handler_version       = "1.0"
+  auto_upgrade_minor_version = true
+
+  settings = <<SETTINGS
+    {
+      "workspaceId": "${var.la-workspace-id}"
+    }
+  SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+    "workspaceKey": "${var.la-workspace-key}"
+    }
+  PROTECTED_SETTINGS
+}
+
+
 resource "azurerm_virtual_machine_extension" "monitor-DependencyAgent-agent" {
   name                  = "DAExtensionWindows"
   virtual_machine_id    =  azurerm_windows_virtual_machine.vm-jumpbox-2.id
