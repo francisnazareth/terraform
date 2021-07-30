@@ -127,8 +127,8 @@ module "virtualmachines" {
    source                = "./virtualmachines"
    rg-name               = module.hub-rg.rg-name
    rg-location           = module.hub-rg.rg-location
-   la-workspace-id       = module.la-workspace.la-workspace-id
-   la-workspace-key      = module.la-workspace.la-workspace-key
+   la-workspace-id       = module.laworkspace.la-workspace-id
+   la-workspace-key      = module.laworkspace.la-workspace-key
    windows-admin-userid  = var.windows-admin-userid
    windows-admin-password  = var.windows-admin-password
    linux-admin-userid    = var.linux-admin-userid
