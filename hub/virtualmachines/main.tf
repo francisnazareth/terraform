@@ -8,7 +8,7 @@ resource "azurerm_linux_virtual_machine" "vm-jumpbox-1" {
   disable_password_authentication  = "false"
 
   network_interface_ids = [
-    var.nic-linjumpserver1-id,
+    var.nic-linjumpserver1-id
   ]
 
   os_disk {
@@ -34,13 +34,13 @@ resource "azurerm_virtual_machine_extension" "da" {
 
   settings = <<SETTINGS
     {
-      "workspaceId" : var.la-workspace-id
+      "workspaceId" : "${var.la-workspace-id}"
     }
   SETTINGS
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "workspaceKey" : var.la-workspace-key
+      "workspaceKey" : "${var.la-workspace-key}"
     }
   PROTECTED_SETTINGS
 }
@@ -58,13 +58,13 @@ resource "azurerm_virtual_machine_extension" "oms_mma02" {
 
   settings = <<SETTINGS
     {
-      "workspaceId" : var.la-workspace-id
+      "workspaceId" : "${var.la-workspace-id}"
     }
   SETTINGS
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "workspaceKey" : var.la-workspace-key
+      "workspaceKey" : "${var.la-workspace-key}"
     }
   PROTECTED_SETTINGS
 }
@@ -96,8 +96,6 @@ resource "azurerm_windows_virtual_machine" "vm-jumpbox-2" {
 
 resource "azurerm_virtual_machine_extension" "monitor-DependencyAgent-agent" {
   name                  = "DAExtensionWindows"
-  location              = var.rg-location
-  resource_group_name   = var.rg-name
   virtual_machine_id    =  azurerm_windows_virtual_machine.vm-jumpbox-2.id
   publisher             = "Microsoft.Azure.Monitoring.DependencyAgent"
   type                  = "DependencyAgentWindows"
@@ -106,13 +104,13 @@ resource "azurerm_virtual_machine_extension" "monitor-DependencyAgent-agent" {
 
   settings = <<SETTINGS
         {
-          "workspaceId": var.la-workspace-id
+          "workspaceId": "${var.la-workspace-id}"
         }
   SETTINGS
 
   protected_settings = <<PROTECTED_SETTINGS
         {
-          "workspaceKey": var.la-workspace-key
+          "workspaceKey": "{var.la-workspace-key}"
         }
   PROTECTED_SETTINGS
 }
