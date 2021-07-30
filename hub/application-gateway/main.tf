@@ -22,7 +22,7 @@ resource "azurerm_application_gateway" "network" {
   location            = var.rg-location
 
   sku {
-    name     = "WAF"
+    name     = "WAF_v2"
     tier     = "WAF_v2"
     capacity = 2
   }
@@ -31,6 +31,8 @@ resource "azurerm_application_gateway" "network" {
     enabled    = true
     firewall_mode = "Prevention"
     max_request_body_size_kb = 16
+    rule_set_version  = 3.1
+    rule_set_type = "OWASP"
   }
 
   gateway_ip_configuration {
