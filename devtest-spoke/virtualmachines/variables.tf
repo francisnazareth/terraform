@@ -33,3 +33,11 @@ variable "linux-vm-admin-user" {
 variable "linux-vm-admin-password" { 
   default = "changeme"
 }
+
+variable "la-workspace-id" { 
+  default = "changeme"
+} 
+
+variable "la-workspace-key" { 
+  default = "changeme"
+}

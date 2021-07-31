@@ -28,6 +28,59 @@ resource "azurerm_linux_virtual_machine" "vm-linsvr1" {
   }
 }
 
+#===================================================================
+#Dependency Agent
+#===================================================================
+
+resource "azurerm_virtual_machine_extension" "da" {
+  name                       = "DAExtension"
+  virtual_machine_id         =  azurerm_linux_virtual_machine.vm-linsvr1.id
+  publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
+  type                       = "DependencyAgentLinux"
+  type_handler_version       = "9.5"
+  auto_upgrade_minor_version = true
+
+  settings = <<SETTINGS
+    {
+      "workspaceId" : "${var.la-workspace-id}"
+    }
+  SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "workspaceKey" : "${var.la-workspace-key}"
+    }
+  PROTECTED_SETTINGS
+}
+
+#===================================================================
+# Set Monitoring and Log Analytics Workspace
+#===================================================================
+resource "azurerm_virtual_machine_extension" "oms_mma02" {
+  name                       = "test-OMSExtension"
+ virtual_machine_id         =  azurerm_linux_virtual_machine.vm-linsvr1.id
+  publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
+  type                       = "OmsAgentForLinux"
+  type_handler_version       = "1.12"
+  auto_upgrade_minor_version = true
+
+  settings = <<SETTINGS
+    {
+      "workspaceId" : "${var.la-workspace-id}"
+    }
+  SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "workspaceKey" : "${var.la-workspace-key}"
+    }
+  PROTECTED_SETTINGS
+}
+
+#===================================================================
+# Custom script extension to install Votes Nodejs application
+#===================================================================
+
 resource "azurerm_virtual_machine_extension" "fn-nodejs-extn" {
   name                 = "nodejs-sample"
   virtual_machine_id   = azurerm_linux_virtual_machine.vm-linsvr1.id
@@ -54,3 +107,4 @@ resource "azurerm_virtual_machine_extension" "fn-nodejs-extn" {
     environment = "DevTest"
   }
 }
+
