@@ -2,7 +2,12 @@ resource "azurerm_public_ip" "appgw-pip" {
   name                = "pip-appgw"
   resource_group_name = var.rg-name
   location            = var.rg-location
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  
+  tags = {
+    environment = "Hub"
+  }
 }
 
 #since these variables are re-used - a locals block makes this more maintainable
@@ -20,6 +25,11 @@ resource "azurerm_application_gateway" "network" {
   name                = "agw-hub-01"
   resource_group_name = var.rg-name
   location            = var.rg-location
+
+  tags = {
+    environment = "Hub"
+  }
+
 
   sku {
     name     = "WAF_v2"
