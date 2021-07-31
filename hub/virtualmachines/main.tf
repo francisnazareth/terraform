@@ -139,3 +139,30 @@ resource "azurerm_virtual_machine_extension" "monitor-DependencyAgent-agent" {
         }
   PROTECTED_SETTINGS
 }
+
+
+resource "azurerm_virtual_machine_extension" "antimalware-agent" {
+    name                       = "AntimalwareAgentWindows"
+    virtual_machine_id    =  azurerm_windows_virtual_machine.vm-jumpbox-2.id
+    publisher                  = "Microsoft.Azure.Security"
+    type                       = "IaaSAntimalware"
+    type_handler_version       = "1.3"
+    auto_upgrade_minor_version = "true"
+
+    settings = <<SETTINGS
+    {
+      "AntimalwareEnabled": true,
+      "RealtimeProtectionEnabled": "true",
+      "ScheduledScanSettings": {
+      "isEnabled": "true",
+      "day": "1",
+      "time": "120",
+      "scanType": "Quick"
+      },
+      "Exclusions": {
+        "Extensions": ".mdf;.ldf;.ndf;.bak;.trn;"
+      }
+    }
+  SETTINGS
+}
+
