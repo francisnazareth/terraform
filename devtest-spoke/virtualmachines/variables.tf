@@ -41,3 +41,8 @@ variable "la-workspace-id" {
 variable "la-workspace-key" { 
   default = "changeme"
 }
+
+variable "instrumentation-key" {
+  default = "changeme"
+}
+

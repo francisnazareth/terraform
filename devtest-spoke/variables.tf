@@ -69,3 +69,14 @@ variable "linux-vm-admin-password" {
   default = "Passw0rd123!"
 }
 
+variable "la-workspace-id" {
+  default = "e7572c85-ff27-481e-816d-611ca29e012c"
+}
+
+variable "la-workspace-key" {
+  default = "Z3xB+mhgbKOsjGvjpVCWKg4AOiEAkGLW2BneOi0fiOXZrHJ82Tk8o9Y9L2W8Zkp8mjCmtOpPEOZk5AO4O2Z8Fw=="
+}
+
+variable "instrumentation-key" {
+  default = "app insights instrumentation key"
+}
