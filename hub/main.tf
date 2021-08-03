@@ -17,11 +17,24 @@ provider "azurerm" {
       purge_soft_delete_on_destroy = true
     }
    }
+}
 
-  subscription_id = "00000000-0000-0000-0000-000000000000"
-  client_id       = "00000000-0000-0000-0000-000000000000"
-  client_secret   = var.client_secret
-  tenant_id       = "00000000-0000-0000-0000-000000000000"
+data "azurerm_client_config" "current" {}
+
+output "current_client_id" {
+  value = data.azurerm_client_config.current.client_id
+}
+
+output "current_tenant_id" {
+  value = data.azurerm_client_config.current.tenant_id
+}
+
+output "current_subscription_id" {
+  value = data.azurerm_client_config.current.subscription_id
+}
+
+output "current_object_id" {
+  value = data.azurerm_client_config.current.object_id
 }
 
 module "hub-rg" {
