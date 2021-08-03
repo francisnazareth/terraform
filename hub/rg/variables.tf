@@ -9,3 +9,7 @@ variable "hub-rg" {
   description = "Hub Resource Group"
   default     = "changeme"
 }
+
+variable "customer-name" { 
+  default = "changeme"
+}

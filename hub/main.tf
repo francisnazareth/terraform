@@ -39,6 +39,7 @@ output "current_object_id" {
 
 module "hub-rg" {
     source         = "./rg"
+    customer-name  = var.customer-name
     hub-rg         = var.hub-rg
     hub-location   = var.hub-location
 }
