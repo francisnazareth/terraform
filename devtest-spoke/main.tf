@@ -16,16 +16,29 @@ provider "azurerm" {
       purge_soft_delete_on_destroy = true
     }
    }
+}
 
-  subscription_id = "68a21693-1bbf-4db6-9aa3-f332ff4aab20"
-  client_id       = "61214184-f394-4095-a52a-b6ceb0e3e0fc"
-  client_secret   = "mBkNyJmk8r1M.--jvyYp-T8qkOKU1.1Mgs"
-  tenant_id       = "72f988bf-86f1-41af-91ab-2d7cd011db47"
+data "azurerm_client_config" "current" {}
+
+output "current_client_id" {
+  value = data.azurerm_client_config.current.client_id
+}
+
+output "current_tenant_id" {
+  value = data.azurerm_client_config.current.tenant_id
+}
+
+output "current_subscription_id" {
+  value = data.azurerm_client_config.current.subscription_id
+}
+
+output "current_object_id" {
+  value = data.azurerm_client_config.current.object_id
 }
 
 module "devtest-rg" {
     source               = "./rg"
-    devtest-rg-name      = var.devtest-rg
+    customer-name        = var.customer-name
     devtest-rg-location  = var.devtest-location
 }
 

@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "devtest-rg" {
-  name     = var.devtest-rg-name
+  name     =  "rg-${var.customer-name}-devtest-01"
   location = var.devtest-rg-location
 
   tags = {

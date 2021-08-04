@@ -160,7 +160,6 @@ resource "azurerm_virtual_machine_extension" "antimalware-agent" {
       "scanType": "Quick"
       },
       "Exclusions": {
-        "Extensions": ".mdf;.ldf;.ndf;.bak;.trn;"
       }
     }
   SETTINGS

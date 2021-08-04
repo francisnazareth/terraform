@@ -2,6 +2,6 @@ variable "devtest-rg-location" {
   default     = "changeme"
 }
 
-variable "devtest-rg-name" {
+variable "customer-name" {
   default     = "changeme"
 }
