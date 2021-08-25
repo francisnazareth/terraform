@@ -1,6 +1,6 @@
 variable "customer-name" {
   description = "Customer name"
-  default = "ooredoo"
+  default = "changeme"
 }
 
 variable "devtest-location" {
@@ -10,7 +10,7 @@ variable "devtest-location" {
 
 variable "devtest-rg" {
   description = "DevTest Resource Group"
-  default     = "rg-devtest-02"
+  default     = "rg-devtest-01"
 }
 
 variable "devtest-prefix" {
@@ -34,7 +34,7 @@ variable "app-subnet-address-space" {
 
 variable "db-subnet-address-space" {
   description = "DB subnet address space"
-  default = "10.30.0.308/28"
+  default = "10.30.0.208/28"
 }
 
 variable "app-subnet-start-ip" { 
@@ -42,7 +42,7 @@ variable "app-subnet-start-ip" {
 }
 
 variable "app-subnet-end-ip" { 
-  default = "10.30.0.308"
+  default = "10.30.0.208"
 }
 
 variable "firewall-ip"  {
